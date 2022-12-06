@@ -1,0 +1,25 @@
+version: "3"
+services:
+  sqlite3:
+    container_name: sqlite3_container
+    image: nouchka/sqlite3:latest
+    stdin_open: true
+    tty: true
+    volumes:
+      #Modify following line
+      - ./db.sqlite3:/home/test/PycharmProjects/pythonProject123/mysite
+    ports:
+      - '9000:9000' # expose ports - HOST:CONTAINER
+    restart: unless-stopped
+  web:
+    build: ../pythonProject123/
+    command: python manage.py runserver 0.0.0.0:8000
+    image: lab-three
+    volumes:
+      - ./mysite:/home/test/PycharmProjects/pythonProject123/mysite
+    #- ./templates:/etc/nginx/templates
+    ports:
+    - "8000:8000"
+    #environment:
+    #- NGINX_HOST=foobar.com
+    #- NGINX_PORT=8081

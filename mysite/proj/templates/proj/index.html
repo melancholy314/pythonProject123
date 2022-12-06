@@ -1,0 +1,73 @@
+{% extends 'proj/layout.html'%}
+{% block head %}
+    <meta charset="UTF-8">
+    <title>For Lab Three</title>
+{% endblock %}
+{% block content %}
+<style>
+
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+</style>
+<h1>Students for lab 3</h1>
+<br>
+<table class="styled-table">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Surname
+            </th>
+            <th>
+                Group
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for result in Student%}
+    <tr class="active-row">
+        <td>{{result.name}}</td>
+        <td>{{result.surname}}</td>
+        <td>{{result.group}}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+
+</table>
+{% endblock %}
