@@ -3,46 +3,31 @@ import ast
 from django.http import JsonResponse
 from . import models
 from .models import Student
-
+import sqlite3
 # Create your views here.
 def proj_view(request):
     return render(request, 'proj/index.html')
 
 def plswork(request):
     query = Student.objects.all()
+    print(request)
     return render(request, 'proj/index.html', {"Student":query})
 
-#def MyView(request):
- #   query = Student.objects.all()
-  #  context = {
-   #     'query': query,
-   # }
-    #return render(request, 'index.html', context)
+def mygod():
+    connection = sqlite3.connect('db.sqlite3')
+    print(connection)
+    cursor = connection.cursor()
+    cursor.execute(f"SELECT * FROM proj_student")
+    records = cursor.fetchall()
+    num = (len(records))
+    return num
 
-#def index(request):
- #   from django.core import serializers
-  #  data = serializers.serialize("python", Student.objects.all())
-   # context = {
-    #    'data': data,
-    #}
-    #return render(request, 'index.html', context)
-
-#def getdata(request):
-def getdata():
- #   if request.method == 'GET':
-  #      data = request.body.decode('utf-8')
-   #     data = ast.literal_eval(data)
-     #   print(data)
-        tmpstud = []
-        allstud = list(models.Student.objects.all())
-
-        if len(allstud) > 1:
-            for stud in allstud:
-                tmpstud.append([allstud.name, allstud.surname, allstud.group])
-        else:
-            tmpstud.append([allstud[0].name, allstud[0].surname, allstud[0].group])
-
-  #      return JsonResponse({
-   #        "st": "test",
-    #        "all_stud": tmpstud
-     #   })
+def mygodtwo():
+    connection = sqlite3.connect('db.sqlite3')
+    print(connection)
+    cursor = connection.cursor()
+    sql = "SELECT * FROM Student"
+    cursor.execute(sql)
+    records = cursor.fetchall()
+    num = (len(records))
+    return num
