@@ -1,16 +1,15 @@
 version: "3"
 services:
-  sqlite3:
-    container_name: sqlite3_container
-    image: nouchka/sqlite3:latest
-    stdin_open: true
-    tty: true
+  database:
+    container_name: db
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: secret
     volumes:
-      #Modify following line
-      - ./db.sqlite3:/home/test/PycharmProjects/pythonProject123/mysite
+      - ./date_postgres:/var/lib/postgresql/data
     ports:
-      - '9000:9000' # expose ports - HOST:CONTAINER
-    restart: unless-stopped
+      - '5432:5432'
   web:
     build: ../pythonProject123/
     command: python manage.py runserver 0.0.0.0:8000
